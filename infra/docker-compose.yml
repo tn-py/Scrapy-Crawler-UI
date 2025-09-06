@@ -1,0 +1,33 @@
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile
+    ports:
+      - "8000:8000"
+    command: ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+  frontend:
+    build:
+      context: ../src/ui
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+
+  lint:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile
+    command: ["sh", "-c", "ruff check . && mypy ."]
+
+  format:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile
+    command: ["black", "."]
+
+  test:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile
+    command: ["pytest", "--cov=src", "--cov-report=term-missing"]

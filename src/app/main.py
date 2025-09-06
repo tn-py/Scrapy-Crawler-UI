@@ -6,6 +6,7 @@ import os
 import subprocess
 from typing import List
 from app.core import test_url
+from selector_tools.main import explain_selector, repair_selector
 
 app = typer.Typer()
 
@@ -45,23 +46,13 @@ def selector_test(
     Test a CSS selector on a URL.
     """
     typer.echo(f"Testing selector '{selector}' on {url}")
-    content = ""
-    if render:
-        typer.echo("JS rendering enabled")
-        try:
-            _, _, _, content = test_url(url, render=True)
-        except Exception as e:
-            typer.echo(f"Error during rendering: {e}", err=True)
-            return
-    else:
-        try:
-            response = requests.get(url, timeout=20)
-            response.raise_for_status()
-            content = response.text
-        except requests.exceptions.RequestException as e:
-            typer.echo(f"Error: {e}", err=True)
-            return
+    result = test_url(url, render)
 
+    if "error" in result:
+        typer.echo(f"Error: {result['error']}", err=True)
+        return
+
+    content = result.get("content", "")
     if content:
         sel = Selector(text=content)
         matches = sel.css(selector)

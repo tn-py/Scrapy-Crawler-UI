@@ -12,8 +12,9 @@ async def run_playwright(url: str):
         latency = time.time() - start_time
         status = response.status if response else "Unknown"
         charset = await page.evaluate("document.characterSet")
+        content = await page.content()
         await browser.close()
-        return {"status": status, "latency": latency, "charset": charset}
+        return {"status": status, "latency": latency, "charset": charset, "content": content}
 
 def test_url(url: str, render: bool = False):
     if render:
@@ -31,6 +32,7 @@ def test_url(url: str, render: bool = False):
                 "status": response.status_code,
                 "latency": latency,
                 "charset": response.encoding,
+                "content": response.text,
             }
         except requests.exceptions.RequestException as e:
             return {"error": str(e)}

@@ -5,8 +5,7 @@
 
 from scrapy import signals
 
-# useful for handling different item types with a single interface
-from itemadapter import ItemAdapter
+
 
 
 class ProjectSpiderMiddleware:

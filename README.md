@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Scrape-Scripts is a fast, scalable Python system designed for web scraping, built with Scrapy, a FastAPI backend, and a React frontend. It provides tools for testing URL reachability, validating CSS selectors, generating reusable spiders, executing crawls at scale, and exporting normalized CSV files. All components are containerized for easy deployment on Coolify via Docker.
+Scrape-Scripts is a fast, scalable Python system designed for web scraping, built with Scrapy, a FastAPI backend, and a React frontend. It provides tools for testing URL reachability, discovering CSS selectors, generating reusable spiders, executing crawls at scale, and exporting normalized CSV files. All components are containerized for easy deployment on Coolify via Docker.
 
 ## Tech Stack
 
@@ -67,9 +67,7 @@ The application provides a set of command-line interface (CLI) tools for scripti
     *   **Purpose**: Reports the status, latency, and character set of a given URL.
     *   **Example**: `agent url test https://example.com`
 
-*   **`agent selector test <URL> --selector ".price" [--render]`**
-    *   **Purpose**: Tests a CSS selector against a live page. Reports the match count, the first three text samples, and the outer HTML of the first match.
-    *   **Example**: `agent selector test https://example.com --selector "h1.title"`
+
 
 *   **`agent spider scaffold <NAME> --url <URL> --selector ".item"`**
     *   **Purpose**: Generates a base Scrapy spider, an item definition, and associated tests, pre-wired to export data via Scrapy FEEDS.

@@ -44,14 +44,23 @@ def repair_selector(url: str, selector: str) -> str:
         if sel.css(selector).get():
             return "Selector is valid and finds elements."
 
-        if selector.startswith("."):
-            class_name = selector[1:]
+        # If the user enters a class name without a dot, add it.
+        repaired_selector = selector
+        if not selector.startswith((".", "#", "[")) and " " not in selector:
+            repaired_selector = f".{selector}"
+
+        # Check if the repaired selector is now valid
+        if sel.css(repaired_selector).get():
+            return f"Selector is valid. Did you mean to use '{repaired_selector}'?"
+
+        if repaired_selector.startswith("."):
+            class_name = repaired_selector[1:]
             all_classes = sel.xpath('//@class').getall()
             all_classes = " ".join(all_classes).split()
             
             close_matches = difflib.get_close_matches(class_name, all_classes)
             if close_matches:
-                return f"Selector did not find any elements. Did you mean '.{close_matches[0]}' நான?
+                return f"Selector did not find any elements. Did you mean '.{close_matches[0]}'?"
             else:
                 return "Selector did not find any elements and no close matches were found."
         
