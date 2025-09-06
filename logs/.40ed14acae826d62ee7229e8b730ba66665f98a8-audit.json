@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "G:\\Coding Projects\\Deployed On Coolify\\Scrape-Scripts\\logs\\.40ed14acae826d62ee7229e8b730ba66665f98a8-audit.json",
+    "files": [
+        {
+            "date": 1757178168280,
+            "name": "G:\\Coding Projects\\Deployed On Coolify\\Scrape-Scripts\\logs\\mcp-puppeteer-2025-09-06.log",
+            "hash": "5c8c7cae753cc42d353c714cea965d3ad7fec13dcc62272c7a19387efaa153c8"
+        }
+    ],
+    "hashType": "sha256"
+}

@@ -1,0 +1,25 @@
+{
+  "theme": "GitHub",
+  "selectedAuthType": "oauth-personal",
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "ACCESS_TOKEN"
+      }
+    },
+    "puppeteer": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "puppeteer-mcp-server"
+      ],
+      "env": {}
+    }
+  },
+  "hasSeenIdeIntegrationNudge": true
+}
